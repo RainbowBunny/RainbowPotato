@@ -12,7 +12,7 @@ async def on_ready():
 async def hello(ctx):
     await ctx.send("Hello!")
 
-#Game Primle
+###
 
 color = dict()
 
@@ -20,7 +20,6 @@ color['green'] = '🟩'
 color['white'] = '⬜'
 color['yellow'] = '🟨'
 
-#Init Game
 IsPrime = [1] * 100000
 
 def Sieve():
@@ -30,6 +29,8 @@ def Sieve():
                 IsPrime[j] = 0
 
 Sieve()
+
+###
 
 HiddenPrime = 0
 CountTurn = 0
