@@ -19,7 +19,6 @@ color = dict()
 color['green'] = '🟩'
 color['white'] = '⬜'
 color['yellow'] = '🟨'
-color['purple'] = '🟪'
 
 #Init Game
 IsPrime = [1] * 100000
