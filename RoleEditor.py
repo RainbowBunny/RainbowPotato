@@ -13,14 +13,6 @@ RegionList.append('region 2')
 async def on_ready():
     print("Ok")
 
-
-@bot.command("addrole")
-@commands.has_permissions(manage_roles = True)
-async def addrole(ctx, member: discord.Member = None):
-    await member.add_roles(ctx.guild.get_role(959057995109634048))
-    await ctx.send(f'Added to {member}')
-
-
 @bot.command("goto")
 @commands.has_permissions(manage_roles = True)
 async def GoTo(ctx, *, area):
