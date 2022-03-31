@@ -12,6 +12,72 @@ async def on_ready():
 async def hello(ctx):
     await ctx.send("Hello!")
 
+class player:
+    def __init__(self):
+        self.hp = "null"
+        self.damage = "null"
+        self.defense = "null"
+        self.speed = "null"
+        self.exp = "null"
+    def create(self, hp, damage, defense, speed):
+        self.hp = hp
+        self.damage = damage
+        self.defense = defense
+        self.speed = speed
+        self.exp = 0
+    
+
+class slime:
+    def __init__(self):
+        self.hp = 10
+        self.damage = 2
+        self.speed = 2
+        self.exp = 5
+        
+@bot.command()
+async def register(ctx):
+    await ctx.send("your character has been created")
+    await ctx.send(ctx.author.id)
+    global you
+    you = player()
+    you.create(20,3,2,3)
+
+@bot.command()
+async def status(ctx):
+    await ctx.send("hp: {0}".format(you.hp))
+    await ctx.send("atk: {0}".format(you.damage))
+    await ctx.send("defense: {0}".format(you.defense))
+    await ctx.send("speed: {0}".format(you.speed))
+
+def fight(player, mob):
+    time = 0
+    block = 0
+    while True:
+        print("your hp:", player.hp)
+        print("opponent's hp", mob.hp)
+        if block < 0:
+            block = 0
+        time += 1
+        if time%2==1:
+            move = input("choose: attack/defense\n")
+            if move[0].lower() == "a":
+                print("you attack for {0} damage".format(player.damage))
+                mob.hp -= player.damage
+                if mob.hp <= 0:
+                    print("You won and gained {0} exp".format(mob.exp))
+                    player.exp += mob.exp
+                    break
+            elif move[0].lower() == "d":
+                print("you decide to block the next attack")
+                block += player.defense
+        else:
+            print("the mob attack you for {0} damage".format(mob.damage-block))
+            player.hp -= (mob.damage-block)
+            if player.hp <= 0:
+                print("wasted")
+#bob = slime()
+#fight(you, bob)
+
 ###
 
 color = dict()
@@ -79,7 +145,7 @@ async def Check(ctx, Number):
 
 @bot.command(name = "guess")
 async def Guess(ctx, Number):
-    global Ended, COuntTurn, Board
+    global Ended, CountTurn, Board
     if Ended:
         await ctx.send("Game Ended")
         return
