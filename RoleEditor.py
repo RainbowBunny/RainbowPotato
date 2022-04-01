@@ -16,20 +16,21 @@ async def on_ready():
 @bot.command("goto")
 @commands.has_permissions(manage_roles = True)
 async def GoTo(ctx, *, area):
-    if area.lower() not in RegionList:
+    area = area.lower()
+    if area not in RegionList:
         await ctx.send('There is no such region.')
         return
 
     for discordrole in ctx.author.roles:
         if discordrole.name.lower() in RegionList:
-            if discordrole.name.lower() == area.lower():
+            if discordrole.name.lower() == area:
                 await ctx.send("You are already in this region.")
                 return
             await ctx.author.remove_roles(discordrole)
     for ServerRole in ctx.guild.roles:
-        if ServerRole.name.lower() == area.lower():
+        if ServerRole.name.lower() == area:
             await ctx.author.add_roles(ServerRole)
-    await ctx.send(f"Moved to {area.lower()}")
+    await ctx.send(f"Moved to {area}")
 
 
 
