@@ -19,7 +19,7 @@ class Reader:
         with open(name, "r") as f:
             self.data[name] = json.load(f)
 
-    @tasks.loop(minutes = 5)
+    @tasks.loop(seconds = 5)
     async def write(self):
         for file_name in self.files:
             with open(file_name, "w") as f:
