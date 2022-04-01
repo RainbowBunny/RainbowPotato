@@ -1,0 +1,9 @@
+# Virtual environments + Environments variable
+.venv/
+.env
+
+# "Databases"
+*.json
+
+# Bytecode
+*.pyc
