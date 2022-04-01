@@ -10,5 +10,6 @@ async def on_ready():
 
 bot.load_extension("cogs.role_editor")
 bot.load_extension("cogs.test")
+bot.load_extension("cogs.primle")
 bot.load_extension("cogs.game")
 bot.run('OTU4MjEyNDk2MTIzMTI5ODc2.YkKC7Q.hyzEAH1qR3oKUgLHth3gj_h6Coo')
