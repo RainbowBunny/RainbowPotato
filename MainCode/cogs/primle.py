@@ -3,23 +3,6 @@ from random import randint
 
 from discord.ext import commands
 
-bot = commands.Bot(command_prefix = "pot ", intents = discord.Intents().all())
-
-@bot.event
-async def on_ready():
-    print("Ready")
-
-
-@bot.command(name = "potato")
-async def potato(ctx):
-    message = await ctx.send("Potato?")
-
-    def c(m):
-        return m.content == 'a'
-    
-    msg = await bot.wait_for('message', check = c)
-    await ctx.send('Hello')
-
 class Primle(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -89,14 +72,17 @@ class Primle(commands.Cog):
             MessageList = msg.content.split()
 
             if len(MessageList) < 2:
-                print('Wrong Format Output!')
-                return
+                await ctx.send('Wrong Format Output!')
+                continue
             
-            Number = int(MessageList[1])
-            print(Number)
+            try:
+                Number = int(MessageList[1])
+            except ValueError:
+                await ctx.send('Wrong Format Output!')
+                continue
             if Number >= 10 ** 5 or Number < 10 ** 4:
-                print('Wrong Format Output!')
-                return
+                await ctx.send('Wrong Format Output!')
+                continue
             StringAnswer = self.Check(HiddenPrime, Number)
             CountTurn = CountTurn + 1
             if Board != '':
@@ -114,7 +100,6 @@ class Primle(commands.Cog):
             if CountTurn == 6:
                 await ctx.send("Guess Limit reached")
                 return
-
 
 def setup(bot):
     bot.add_cog(Primle(bot))

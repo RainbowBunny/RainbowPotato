@@ -77,25 +77,6 @@ def fight(player, mob):
 #bob = slime()
 #fight(you, bob)
 """
-###
-
-color = dict()
-
-color['green'] = '🟩'
-color['white'] = '⬜'
-color['yellow'] = '🟨'
-
-IsPrime = [1] * 100000
-
-def Sieve():
-    for i in range(2, 1000):
-        if IsPrime[i]:
-            for j in range(i * i, 100000, i):
-                IsPrime[j] = 0
-
-Sieve()
-
-###
 
 HiddenPrime = 0
 CountTurn = 0
