@@ -10,9 +10,20 @@ class BetterXO(commands.Cog):
         self.Inbattle = []
 
     @commands.command(name = 'challenge')
-    async def challenge(self, ctx, user:discord.Member):
+    async def challenge(self, ctx, *, name):
+        Founded = 0
+        secondplayer = 0
+        for mem in ctx.guild.members:
+            print(mem.name)
+            if mem.name == name:
+                Founded = 1
+                secondplayer = mem
+                break
+        
+        if not Founded:
+            await ctx.send('There is no such user!') 
+            return
         firstplayer = ctx.author
-        secondplayer = user
         
         if firstplayer in self.Occupied:
             await ctx.send('You have already challenging someone!')
