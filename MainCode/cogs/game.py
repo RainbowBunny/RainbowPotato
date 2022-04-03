@@ -7,7 +7,7 @@ data_reader = Reader()
 data_reader.add_file("data.json")
 data_reader.loop()
 data = data_reader["data.json"]
-stats_list = ["hp", "mp", "str", "vit", "agi", "dex", "int"]
+stats_list = ["race", "hp", "mp", "str", "vit", "agi", "dex", "int"]
 
 class Game:
     @staticmethod
@@ -19,13 +19,25 @@ class Game:
     @staticmethod
     def show_stats(stats) -> discord.Embed:
         embed = discord.Embed(title = "Stats")
-        desc = []
-        for i in stats_list:
-            line = f"**{i.upper()}**: {stats[i]}"
-            desc.append(line)
-        desc.append(f"Remaining stat points: {stats['points']}")
-
-        embed.description = '\n'.join(desc)
+        #desc = []
+        embed.add_field(name = "RACE", value = stats["race"].capitalize(), inline = False)
+        for i in range(1,len(stats_list),2):
+            #print(i, stats_list[i].upper(), stats_list[i+1].upper())
+            #stat_1 = f"**{stats_list[i].upper()}**: {stats[stats_list[i]]}"
+            #stat_2 = f"**{stats_list[i+1].upper()}**: {stats[stats_list[i+1]]}"
+            #row = [stat_1, stat_2]
+            #line = "".join(word.ljust(20) for word in row)
+            #embed.add_field(name=stat[,value='value',inline=False)
+            embed.add_field(name = f"**{stats_list[i].upper()}**", value = stats[stats_list[i]], inline = True)
+            if i == 7:
+                break
+            embed.add_field(name = chr(173), value = chr(173), inline = True)
+            embed.add_field(name = f"**{stats_list[i+1].upper()}**", value = stats[stats_list[i+1]], inline = True)
+            #embed.add_field(name = chr(173), value = chr(173), inline = False)
+            #desc.append(line)
+        #esc.append(f"Remaining stat points: {stats['points']}")
+        embed.add_field(name = f"STAT POINTS: {stats['points']}", value = chr(173), inline = False)
+        #embed.description = '\n'.join(desc)
         return embed
 
     @staticmethod
@@ -83,8 +95,10 @@ To confirm your base stats, type `end`
         id, user_id = user_id, str(user_id)
         if Game.check_registered(id):
             return 0
-
-        stats = {i: 10 for i in stats_list}
+        stats = {"race" : "human"}
+        for i in range(1,len(stats_list)):
+            stats[stats_list[i]] = 10
+        #stats = {i: 10 for i in stats_list}
         stats["points"] = 100
         data[user_id] = stats
 
