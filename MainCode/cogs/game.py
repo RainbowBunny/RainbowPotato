@@ -29,32 +29,29 @@ class Game:
         return embed
 
     @staticmethod
-    async def register(bot, user_id):
+    async def add_stats(bot, user_id):
         id, user_id = user_id, str(user_id)
-        if Game.check_registered(id):
-            return 0
-
-        stats = {i: 10 for i in stats_list}
-        stats["points"] = 100
         user = bot.get_user(id)
-
+        stats = data[user_id]
+        if stats["points"] == 0:
+            return 0
         await user.send(f"""
-        You currently have 70 stat points, you can now freely add points to your base stats.
-        You should type messages in the following format:
-        `<stat name> <amount to add>`
-        with `<stat name>` in `{stats_list}`.
-        Note: `<amount to add>` can be negative
-        To confirm your base stats, type `end`
+        You currently have {data[user_id]["points"]} stat points, you can now freely add points to your base stats.
+You should type messages in the following format:
+`<stat name> <amount to add>`
+with `<stat name>` in `{stats_list}`.
+Note: `<amount to add>` can be negative
+To confirm your base stats, type `end`
         """)
-        
-        stats_msg = await user.send(embed = Game.show_stats(stats))
 
+        stats_msg = await user.send(embed = Game.show_stats(stats))
+        
         while True:
             try:
                 msg = await bot.wait_for("message", check = lambda m: m.author.id == id and m.guild == None, timeout = 60.0)
             except asyncio.TimeoutError:
-                await user.send("You haven't replied for too long, cancelling registration")
-                return 2
+                await user.send("You haven't replied for too long, stat adjustment timed out")
+                return 1
 
             d = msg.content.split()
             d = [i for i in d if i != '']
@@ -79,24 +76,57 @@ class Game:
                 await user.send("Invalid amount of points!", delete_after = 5)
 
         data[user_id] = stats
+        return 2
 
-        return 1
+    @staticmethod
+    async def register(user_id):
+        id, user_id = user_id, str(user_id)
+        if Game.check_registered(id):
+            return 0
+
+        stats = {i: 10 for i in stats_list}
+        stats["points"] = 100
+        data[user_id] = stats
 
 class Potato(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
     @commands.command(
-        help = "Register your player."
+        help = "- Register your player."
     )
     async def register(self, ctx):
-        error_code = await Game.register(self.bot, ctx.author.id)
+        error_code = await Game.register(ctx.author.id)
         if error_code == 0:
             await ctx.send("You have already been registered!")
-        elif error_code == 1:
-            await ctx.send(f"Successfully registered user {ctx.author.mention}.")
         else:
-            await ctx.send("Registration failed.")
+            await ctx.send(f"Congratulation on creating your character, {ctx.author.mention}. Try using the command `pot add_stats` to use your stat points")
+
+    @commands.command(
+        help = "- Use your stat points."
+    )
+    async def add_stats(self, ctx):
+        await ctx.send("Stat adjusting in process")
+        error_code = await Game.add_stats(self.bot, ctx.author.id)
+        if error_code == 0:
+            await ctx.send("You don't have any stat points to spend, try leveling up and get some!")
+        elif error_code == 1:
+            await ctx.send("Stat adjustment timed out, your changes were not saved...")
+        else:
+            await ctx.send("Stat successfully adjusted!")
+
+    @commands.command(
+        help = "- Display your profile."
+    )
+    async def profile(self,ctx):
+        user_id = str(ctx.author.id)
+        stats = data[user_id]
+        embed = Game.show_stats(stats)
+        embed.set_author(name = str(ctx.author), icon_url = ctx.author.avatar_url)
+        #pfp = message.server.get_member(user_id).avatar_url
+        #embed.set_image(url=(pfp))
+        embed.set_image(url = ctx.author.avatar_url)
+        await ctx.send(embed = embed)
 
 def setup(bot):
     bot.add_cog(Potato(bot))
