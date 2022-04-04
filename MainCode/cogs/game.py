@@ -1,4 +1,6 @@
 import discord
+import random
+import time
 from discord.ext import commands
 from utils import Reader
 import asyncio
@@ -27,6 +29,7 @@ class Game:
 
         embed.description = '\n'.join(desc)
         return embed
+
 
     @staticmethod
     async def register(bot, user_id):
@@ -81,10 +84,12 @@ class Game:
         data[user_id] = stats
 
         return 1
+            
 
 class Potato(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.last_message = dict()
 
     @commands.command(
         help = "Register your player."
@@ -97,6 +102,15 @@ class Potato(commands.Cog):
             await ctx.send(f"Successfully registered user {ctx.author.mention}.")
         else:
             await ctx.send("Registration failed.")
+
+    @commands.Cog.listener("on_message")
+    async def mob_spawner(self, message):
+        if message.author.bot: return
+        cur_time = time.time()
+        if cur_time > self.last_message.get(message.channel.id, 0) + 5:
+            if random.randint(1, 100) <= 10: 
+                await message.channel.send("A potato has emerged!")
+            self.last_message[message.channel.id] = cur_time
 
 def setup(bot):
     bot.add_cog(Potato(bot))
