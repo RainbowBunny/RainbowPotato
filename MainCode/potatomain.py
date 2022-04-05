@@ -10,6 +10,7 @@ async def on_ready():
     print("Ok")
 
 bot.load_extension("cogs.teleport")
+bot.load_extension("cogs.pvp")
 #bot.load_extension("cogs.test")
 bot.load_extension("cogs.primle")
 bot.load_extension("cogs.game")
