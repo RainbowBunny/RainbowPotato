@@ -5,11 +5,11 @@ RegionList = []
 RegionList.append('region 1')
 RegionList.append('region 2')
 
-class RoleEditor(commands.Cog):
+class Move(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name = "goto")
+    @commands.command(name = "travel", help = "- Travel to a place")
     @commands.has_permissions(manage_roles = True)
     async def GoTo(self, ctx, *, area):
         area = area.lower()
@@ -32,4 +32,4 @@ class RoleEditor(commands.Cog):
         await ctx.send(f"Moved to {area}")
 
 def setup(bot):
-    bot.add_cog(RoleEditor(bot))
+    bot.add_cog(Move(bot))
