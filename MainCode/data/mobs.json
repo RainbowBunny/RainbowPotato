@@ -1,6 +1,7 @@
 {
     "slime": {
-	"img" : "http://3.bp.blogspot.com/_ip67u2xBzn0/SkhaWP30c3I/AAAAAAAAAAM/LiVzGYciSR8/S740/poring.png",
+        "name": "Slime",
+	    "img" : "https://static.wikia.nocookie.net/tensei-shitara-slime-datta-ken/images/3/34/Rimuru_Slime_Anime.png/revision/latest/scale-to-width-down/350?cb=20180922214304",
         "hp": 10,
         "mp": 10,
         "str": 10,
@@ -13,7 +14,8 @@
         }
     },
     "goblin": {
-	"img" : "https://howtodrawforkids.com/wp-content/uploads/2017/03/How-to-draw-a-goblin-for-kids-1.jpg",
+        "name": "Goblin",
+	    "img" : "https://howtodrawforkids.com/wp-content/uploads/2017/03/How-to-draw-a-goblin-for-kids-1.jpg",
         "hp": 10,
         "mp": 10,
         "str": 15,

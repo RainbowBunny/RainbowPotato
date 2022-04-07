@@ -2,7 +2,6 @@ import discord
 import random
 import time
 from discord.ext import commands
-from utils import Reader
 import asyncio
 import json
 from game.objects import *
@@ -10,12 +9,7 @@ from game import data_loader as GameData
 from game import calculations as Calc
 import math
 
-data_reader = Reader()
-
-data_reader.add_file("data.json")
-data_reader.loop()
-
-data = data_reader["data.json"]
+data = GameData.data_reader["data.json"]
 
 stats_list = ["hp", "mp", "str", "vit", "agi", "dex", "int"]
 
@@ -37,10 +31,10 @@ def set_skill_slot(user_id, slot, skill_name):
     user_id = str(user_id)
     data[user_id]["active_skills"][slot - 1] = skill_name
 
-async def battle(user, embed, channel):
-    await channel.send(embed = embed)
-    await channel.send(f"{user.mention}, prepare for battle")
-    
+async def start_battle(battlers, channel):
+    battle = Battle(battlers, channel)
+    await battle.start()
+
 async def spawn_mob(bot, channel: discord.TextChannel):
     spawns = GameData.get_spawns(channel.id)
     if spawns:
@@ -58,6 +52,7 @@ async def spawn_mob(bot, channel: discord.TextChannel):
             mob_embed = discord.Embed(title = f"A {to_spawn} has emerged!", color = random.randint(0, 16777215))
             mob_embed.set_image(url = mob_data["img"])
             msg = await channel.send(embed = mob_embed)
+
             await msg.add_reaction("⚔")
             try:
                 reaction, user = await bot.wait_for("reaction_add", check = lambda reaction, user : str(reaction.emoji) == "⚔" and reaction.message.id == msg.id and user.id != bot.user.id, timeout = 30.0)
@@ -71,8 +66,8 @@ async def spawn_mob(bot, channel: discord.TextChannel):
             await msg.clear_reaction("⚔")
             
             battle_channel = discord.utils.get(reaction.message.guild.channels, name = "battle-1")
-            await battle(user, mob_embed, battle_channel)
-            return
+
+            await start_battle([Player(user), Mob(mob_data)], battle_channel)
             
 def check_registered(user_id) -> bool:
     if str(user_id) in data:

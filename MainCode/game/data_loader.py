@@ -1,4 +1,5 @@
 import json
+from utils import Reader
 
 with open("data/mobs.json") as f:
     mobs = json.load(f)
@@ -6,6 +7,14 @@ with open("data/maps.json") as f:
     maps_data = json.load(f)
 with open("data/skills.json") as f:
     skills_data = json.load(f)
+
+data_reader = Reader()
+
+data_reader.add_file("data.json")
+data_reader.loop()
+
+def get_player(id) -> dict:
+    return data_reader["data.json"][str(id)]
 
 _id_to_map = {}
 _map_to_id = {}
