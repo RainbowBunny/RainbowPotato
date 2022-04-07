@@ -1,0 +1,17 @@
+{
+    "beginner_town": {
+        "town_center": {
+            "channel_id": 959056769143951400,
+            "spawns": {
+                
+            } 
+        },
+        "green_forest": {
+            "channel_id": 959056785296216075,
+            "spawns": {
+                "goblin": 0.3,
+                "slime": 0.7
+            } 
+        }
+    }
+}

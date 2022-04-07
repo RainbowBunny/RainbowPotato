@@ -1,0 +1,18 @@
+{
+    "stab": {
+        "name": "Stab",
+        "hp": 0,
+        "str": 0.2,
+        "int": 0,
+        "effect": "none",
+        "cooldown": 5
+    },
+    "slime_ball": {
+        "name": "Slime Ball",
+        "hp": 0,
+        "str": 0.18,
+        "int": 0.02,
+        "effect": "none",
+        "cooldown": 5 
+    }
+}

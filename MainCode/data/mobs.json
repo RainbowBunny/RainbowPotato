@@ -1,0 +1,28 @@
+{
+    "slime": {
+	"img" : "http://3.bp.blogspot.com/_ip67u2xBzn0/SkhaWP30c3I/AAAAAAAAAAM/LiVzGYciSR8/S740/poring.png",
+        "hp": 10,
+        "mp": 10,
+        "str": 10,
+        "vit": 0,
+        "agi": 0,
+        "dex": 0,
+        "int": 0,
+        "skill": {
+            "slime_ball": 0.35
+        }
+    },
+    "goblin": {
+	"img" : "https://howtodrawforkids.com/wp-content/uploads/2017/03/How-to-draw-a-goblin-for-kids-1.jpg",
+        "hp": 10,
+        "mp": 10,
+        "str": 15,
+        "vit": 3,
+        "agi": 3,
+        "dex": 0,
+        "int": 0,
+        "skill": {
+            "stab": 0.3
+        }
+    }
+}
