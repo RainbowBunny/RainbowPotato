@@ -7,6 +7,8 @@
         "str": 0,
         "int": 0,
         "effect": "none",
+        "accuracy": 1, 
+        "crit_chance": 0,
         "cooldown": 0
     },
     "punch": {
@@ -17,18 +19,47 @@
         "str": 0.25,
         "int": 0,
         "effect": "none",
+        "accuracy": 1, 
+        "crit_chance": 0.1,
         "cooldown": 2.5
     },
-    "swordmanship": {
-        "name": "Swordmanship",
-        "type": "passive",
-        "parent": "punch",
+    "sword_slash": {
+        "name": "Sword Slash",
+        "type": "active",
+        "parent": "melee",
         "hp": 0,
-        "str": 0.01,
+        "str": 0.4,
         "int": 0,
         "effect": "none",
-        "cooldown": 0
+        "accuracy": 1, 
+        "crit_chance": 0.2,
+        "cooldown": 2.5
     },
+    "rapid_strike": {
+        "name": "Rapid Strike",
+        "type": "active",
+        "parent": "sword_slash",
+        "hp": 0,
+        "str": 0.3,
+        "int": 0,
+        "effect": "none",
+        "accuracy": 1, 
+        "crit_chance": 0.1,
+        "cooldown": 1.5
+    },
+    "crescent_strike": {
+        "name": "Crescent Strike",
+        "type": "active",
+        "parent": "sword_slash",
+        "hp": 0,
+        "str": 0.3,
+        "int": 0,
+        "effect": "target_all",
+        "accuracy": 1, 
+        "crit_chance": 0.1,
+        "cooldown": 1.5
+    },
+    ""
     "ranged":  {
         "name": "Ranged",
         "type": "passive",
@@ -37,6 +68,8 @@
         "str": 0,
         "int": 0,
         "effect": "none",
+        "accuracy": 0, 
+        "crit_chance": 0,
         "cooldown": 0
     },
     "rock_throw": {
@@ -47,7 +80,69 @@
         "str": 0.25,
         "int": 0,    
         "effect": "none",
+        "accuracy": 0.85, 
+        "crit_chance": 0.2,
         "cooldown": 3
+    },
+    "archery": {
+        "name": "Archery",
+        "type": "active",
+        "parent": "ranged",
+        "hp": 0,
+        "str": 0.3,
+        "int": 0,    
+        "effect": "none",
+        "accuracy": 0.7, 
+        "crit_chance": 0.2,
+        "cooldown": 4
+    },
+    "twin_shot": {
+        "name": "Archery",
+        "type": "active",
+        "parent": "archery",
+        "hp": 0,
+        "str": 0.3,
+        "int": 0,    
+        "effect": "none",
+        "accuracy": 0.75, 
+        "crit_chance": 0.15,
+        "cooldown": 4
+    },
+    "arrow_rain": {
+        "name": "Arrow rain",
+        "type": "active",
+        "parent": "twin_shot",
+        "hp": 0,
+        "str": 0.3,
+        "int": 0,    
+        "effect": "none",
+        "accuracy": 1, 
+        "crit_chance": 0,
+        "cooldown": 4
+    },
+    "piercing_arrow": {
+        "name": "Piercing Arrow",
+        "type": "active",
+        "parent": "archery",
+        "hp": 0,
+        "str": 0.3,
+        "int": 0,    
+        "effect": "none",
+        "accuracy": 1, 
+        "crit_chance": 0.1,
+        "cooldown": 4
+    },
+    "deadly_precision": {
+        "name": "Deadly Precision",
+        "type": "active",
+        "parent": "piercing_arrow",
+        "hp": 0,
+        "str": 0.3,
+        "int": 0,    
+        "effect": "none",
+        "accuracy": 1, 
+        "crit_chance": 1,
+        "cooldown": 4
     },
     "stab": {
         "name": "Stab",
@@ -57,6 +152,8 @@
         "str": 0.2,
         "int": 0,
         "effect": "none",
+        "accuracy": 1, 
+        "crit_chance": 0.2,
         "cooldown": 5
     },
     "slime_ball": {
@@ -67,6 +164,8 @@
         "str": 0.18,
         "int": 0.02,
         "effect": "none",
+        "accuracy": 0.85, 
+        "crit_chance": 0.2,
         "cooldown": 5 
     }
 }
