@@ -7,6 +7,7 @@ import math
 from discord.ext import tasks
 
 battles = dict()
+battle_list = []
 
 class Battle:
     # battlers: list of Creature
@@ -64,6 +65,8 @@ class Battle:
                     await guild.get_member(i.user.id).remove_roles(discord.utils.get(guild.roles, name = self.channel.name))
 
             self.ended = True
+            global battle_list
+            battle_list.remove(self.channel.name)
 
     async def start(self):
         self.message = await self.channel.send(embed = self.get_battle_status(), view = BattleView(self.battlers, self.id))

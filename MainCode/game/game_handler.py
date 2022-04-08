@@ -38,6 +38,14 @@ async def start_battle(battlers, spawn_channel, channel, embed):
     battle = Battle(battlers, spawn_channel, channel)
     await battle.start()
 
+def find_battle():
+    global battle_list
+    for i in range(1, 11):
+        name = "battle-" + str(i)
+        if name not in battle_list:
+            battle_list.append(name)
+            return name
+
 async def spawn_mob(bot, channel: discord.TextChannel):
     spawns = GameData.get_spawns(channel.id)
     if spawns:
@@ -65,10 +73,12 @@ async def spawn_mob(bot, channel: discord.TextChannel):
                 return
             
             await channel.send(f"{user} has yoinked the {to_spawn}!")
-            await user.add_roles(discord.utils.get(reaction.message.guild.roles, name = "battle-1"))
+
+            battle_name = find_battle()
+            await user.add_roles(discord.utils.get(reaction.message.guild.roles, name = battle_name))
             await msg.clear_reaction("⚔")
             
-            battle_channel = discord.utils.get(reaction.message.guild.channels, name = "battle-1")
+            battle_channel = discord.utils.get(reaction.message.guild.channels, name = battle_name)
 
             await start_battle([Player(user), Mob(mob_data)], channel, battle_channel, mob_embed)
             
