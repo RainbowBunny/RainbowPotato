@@ -1,6 +1,58 @@
 {
+    "melee": {
+        "name": "Melee",
+        "type": "passive",
+        "parent": null,
+        "hp": 0,
+        "str": 0,
+        "int": 0,
+        "effect": "none",
+        "cooldown": 0
+    },
+    "punch": {
+        "name": "Punch",
+        "type": "active",
+        "parent": "melee",
+        "hp": 0,
+        "str": 0.25,
+        "int": 0,
+        "effect": "none",
+        "cooldown": 2.5
+    },
+    "swordmanship": {
+        "name": "Swordmanship",
+        "type": "passive",
+        "parent": "punch",
+        "hp": 0,
+        "str": 0.01,
+        "int": 0,
+        "effect": "none",
+        "cooldown": 0
+    },
+    "ranged":  {
+        "name": "Ranged",
+        "type": "passive",
+        "parent": null,
+        "hp": 0,
+        "str": 0,
+        "int": 0,
+        "effect": "none",
+        "cooldown": 0
+    },
+    "rock_throw": {
+        "name": "Rock throw",
+        "type": "active",
+        "parent": "ranged",
+        "hp": 0,
+        "str": 0.25,
+        "int": 0,    
+        "effect": "none",
+        "cooldown": 3
+    },
     "stab": {
         "name": "Stab",
+        "type": "active",
+        "parent": null,
         "hp": 0,
         "str": 0.2,
         "int": 0,
@@ -9,6 +61,8 @@
     },
     "slime_ball": {
         "name": "Slime Ball",
+        "type": "active",
+        "parent": null,
         "hp": 0,
         "str": 0.18,
         "int": 0.02,

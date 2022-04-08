@@ -4,18 +4,21 @@ from game import data_loader as GameData
 from game import calculations as Calc
 import random
 import math
+from discord.ext import tasks
 
 battles = dict()
 
 class Battle:
     # battlers: list of Creature
-    def __init__(self, battlers, channel):
+    def __init__(self, battlers, spawn_channel, channel):
         self.battlers = battlers
         for i in range(len(self.battlers)): 
             self.battlers[i].id = i
             self.battlers[i].base_hp = self.battlers[i].hp
 
+        self.spawn_channel = spawn_channel
         self.channel = channel
+        self.ended = False
 
         self.id = ""
         for i in range(30): self.id += str(random.randint(0, 9))
@@ -26,7 +29,7 @@ class Battle:
         for i in self.battlers:
             name = i.user.name if isinstance(i, Player) else i.name
 
-            remaining_hp = self.battlers[i.id].hp
+            remaining_hp = max(0, self.battlers[i.id].hp)
             base_hp = self.battlers[i.id].base_hp
             
             bar = ""
@@ -39,8 +42,34 @@ class Battle:
         
         return embed
 
+    async def update_battlers_status(self):
+        await self.message.edit(embed = self.get_battle_status())
+
+        alive = []
+
+        for i in range(len(self.battlers)):
+            if self.battlers[i].hp > 0: 
+                alive.append(self.battlers[i])
+            else:
+                if isinstance(self.battlers[i], Mob): self.battlers[i].attack.stop()
+                await self.channel.send(f"{self.battlers[i].name} died...")
+
+        if len(alive) == 1:
+            await self.spawn_channel.send(f"{alive[0].user.mention if isinstance(alive[0], Player) else alive[0].name} has won!! you have become amongus")
+            await self.channel.purge(limit = 1000)
+            for i in self.battlers:
+                if isinstance(i, Mob): i.attack.stop()
+                else:
+                    guild = self.channel.guild
+                    await guild.get_member(i.user.id).remove_roles(discord.utils.get(guild.roles, name = self.channel.name))
+
+            self.ended = True
+
     async def start(self):
         self.message = await self.channel.send(embed = self.get_battle_status(), view = BattleView(self.battlers, self.id))
+        for i in self.battlers:
+            if isinstance(i, Mob):
+                i.attack.start(self.id)
 
     # attacker and defender are ids
     async def attack(self, attacker: int, skill):
@@ -49,9 +78,6 @@ class Battle:
         self.battlers[defender].hp -= damage
         print(attacker, skill, "DAMAGE", damage)
         await self.update_battlers_status()
-
-    async def update_battlers_status(self):
-        await self.message.edit(embed = self.get_battle_status())
 
 class SkillButton(discord.ui.Button):
     def __init__(self, row, skill, player, battle_id):
@@ -64,6 +90,10 @@ class SkillButton(discord.ui.Button):
         self.skill = skill
 
     async def callback(self, interaction: discord.Interaction):
+        if battles[self.battle_id].ended:
+            await interaction.response.edit_message("Battle has ended.", view = None)
+            return
+
         # await interaction.channel.send(f"You used {self.skill['name']}")
         await battles[self.battle_id].attack(self.player.id, self.skill)
 
@@ -82,7 +112,7 @@ class PlayerAttackView(discord.ui.View):
         cur = 0
         self.player = player
         
-        for i in player.active_skills:
+        for i in player.equipped_skills:
             if cur >= 5: self.add_item(SkillButton(2, GameData.get_skill(i), player, battle_id))
             else: self.add_item(SkillButton(1, GameData.get_skill(i), player, battle_id))
             cur += 1
@@ -118,9 +148,25 @@ class Creature:
 
 class Player(Creature):
     def __init__(self, user: discord.User):
+        self.name = user.name
         # print(GameData.get_player(user.id))
         super().__init__(GameData.get_player(user.id))
         self.user = user
 
 class Mob(Creature):
-    pass
+    @tasks.loop(seconds = 1)
+    async def attack(self, battle_id):
+        do_attack = random.randint(0, 4)
+        if do_attack == 0:
+            r = random.random()
+            s = 0
+            selected_skill = None
+            for skill, rate in self.skills.items():
+                s += rate
+                if r <= s:
+                    selected_skill = skill
+                    break
+        
+            print("MOB ATTACK", selected_skill)
+
+            await battles[battle_id].attack(self.id, GameData.get_skill(skill))

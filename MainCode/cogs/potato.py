@@ -26,12 +26,11 @@ class Potato(commands.Cog):
     async def testattackview(self, ctx):
         await Game.test_attack_view(ctx)
 
-    @commands.command(
-        help = "Set skill slot."
-    )
-    async def setskillslot(self, ctx, slot: int, skill):
-        Game.set_skill_slot(ctx.author.id, slot, skill)
-        await ctx.send(f"amongus")
+    # @commands.command(
+    #     help = "- Show your skills."
+    # )
+    #async def skills(self, ctx):
+        #waterlemon
 
     @commands.command(
         help = "- Register your player."

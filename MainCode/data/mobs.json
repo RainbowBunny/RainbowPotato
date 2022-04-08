@@ -9,8 +9,8 @@
         "agi": 0,
         "dex": 0,
         "int": 0,
-        "skill": {
-            "slime_ball": 0.35
+        "skills": {
+            "slime_ball": 1
         }
     },
     "goblin": {
@@ -23,8 +23,8 @@
         "agi": 3,
         "dex": 0,
         "int": 0,
-        "skill": {
-            "stab": 0.3
+        "skills": {
+            "stab": 1
         }
     }
 }

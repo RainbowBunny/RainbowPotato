@@ -31,8 +31,11 @@ def set_skill_slot(user_id, slot, skill_name):
     user_id = str(user_id)
     data[user_id]["active_skills"][slot - 1] = skill_name
 
-async def start_battle(battlers, channel):
-    battle = Battle(battlers, channel)
+async def start_battle(battlers, spawn_channel, channel, embed):
+    guild = channel.guild
+    await channel.send(f"{', '.join([guild.get_member(user.user.id).mention for user in battlers if not isinstance(user, Mob)])}, prepare for battle!")
+    await channel.send(embed = embed)
+    battle = Battle(battlers, spawn_channel, channel)
     await battle.start()
 
 async def spawn_mob(bot, channel: discord.TextChannel):
@@ -55,7 +58,7 @@ async def spawn_mob(bot, channel: discord.TextChannel):
 
             await msg.add_reaction("⚔")
             try:
-                reaction, user = await bot.wait_for("reaction_add", check = lambda reaction, user : str(reaction.emoji) == "⚔" and reaction.message.id == msg.id and user.id != bot.user.id, timeout = 30.0)
+                reaction, user = await bot.wait_for("reaction_add", check = lambda reaction, user : str(reaction.emoji) == "⚔" and not any(role.name.startswith("battle") for role in reaction.message.guild.get_member(user.id).roles) and reaction.message.id == msg.id and user.id != bot.user.id, timeout = 30.0)
             except asyncio.TimeoutError:
                 await msg.clear_reaction("⚔")
                 await channel.send(f"The {to_spawn} has escaped")
@@ -67,7 +70,7 @@ async def spawn_mob(bot, channel: discord.TextChannel):
             
             battle_channel = discord.utils.get(reaction.message.guild.channels, name = "battle-1")
 
-            await start_battle([Player(user), Mob(mob_data)], battle_channel)
+            await start_battle([Player(user), Mob(mob_data)], channel, battle_channel, mob_embed)
             
 def check_registered(user_id) -> bool:
     if str(user_id) in data:
@@ -174,6 +177,6 @@ async def register(user_id):
         stats[stats_list[i]] = 10
 
     stats["points"] = 100
-    stats["skills"] = []
-    stats["active_skills"] = [None] * 10
+    stats["skills"] = ["melee", "ranged", "punch", "rock_throw"]
+    stats["equipped_skills"] = ["punch", "rock_throw"] + [None] * 8
     data[user_id] = stats  
