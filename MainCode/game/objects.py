@@ -173,3 +173,7 @@ class Mob(Creature):
             print("MOB ATTACK", selected_skill)
 
             await battles[battle_id].attack(self.id, GameData.get_skill(skill))
+
+
+for skill in skills_data:
+    print(skills_data.get(skill, None))
