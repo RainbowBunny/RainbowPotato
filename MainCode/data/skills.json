@@ -1,601 +1,111 @@
 {
-
-
-    "melee": {
-        "name": "Melee",
-        "type": "passive",
-        "parent": null,
-        "hp": 0,
-        "str": 0,
-        "int": 0,
-        "effect": "none",
-        "accuracy": 1, 
-        "crit_chance": 0,
-        "cooldown": 0
+    "melee" : {
+        "parent" : null,
+        "type" : "passive", 
+        "target" : "self",
+        "scaling" : "0_0_0_0_0",
+        "crit" : 0,
+        "cooldown" : 0,
+        "status" : {}
     },
 
-
-    "punch": {
-        "name": "Punch",
-        "type": "active",
-        "parent": "melee",
-        "hp": 0,
-        "str": 0.25,
-        "int": 0,
-        "effect": "none",
-        "accuracy": 1, 
-        "crit_chance": 0.1,
-        "cooldown": 2.5
+    "punch" : {
+        "parent" : null,
+        "type" : "active",
+        "target" : "single",
+        "scaling" : "0_0_0_0_0",
+        "crit" : 0.1,
+        "cooldown" : 2.5,
+        "status" : {}
     },
 
-    
-    "sword_art": {
-        "name": "Sword Art",
-        "type": "passive",
-        "parent": "melee",
-        "hp": 0,
-        "str": 0.25,
-        "int": 0,
-        "effect": "none",
-        "accuracy": 1, 
-        "crit_chance": 0.1,
-        "cooldown": 2.5
+    "sword_art" : {
+        "parent" : "melee",
+        "type" : "passive",
+        "target" : "self",
+        "scaling" : "0_0_0_0_0",
+        "crit" : 0,
+        "cooldown" : 0,
+        "status" : {}
     },
 
-    "sword_slash": {
-        "name": "Sword Slash",
-        "type": "active",
-        "parent": "sword_art",
-        "hp": 0,
-        "str": 0.4,
-        "int": 0,
-        "effect": "none",
-        "accuracy": 1, 
-        "crit_chance": 0.2,
-        "cooldown": 2.5
+    "sword_slash" : {
+        "parent" : "sword_art",
+        "type" : "active",
+        "target" : "single",
+        "scaling" : "0_0_0_0_0",
+        "crit" : 0,
+        "cooldown" : 4.5,
+        "status" : {}
     },
 
-    "sword_stab": {
-        "name": "Sword Stab",
-        "type": "active",
-        "parent": "sword_art",
-        "hp": 0,
-        "str": 0.3,
-        "int": 0,
-        "effect": "none",
-        "accuracy": 1, 
-        "crit_chance": 0.1,
-        "cooldown": 1.5
-    },
-    
-
-    "sword_master": {
-        "name": "Sword Master",
-        "type": "passive",
-        "parent": "sword_art",
-        "hp": 0,
-        "str": 0.4,
-        "int": 0,
-        "effect": "none",
-        "accuracy": 1, 
-        "crit_chance": 0.2,
-        "cooldown": 2.5
+    "sword_stab" : {
+        "parent" : "sword_art",
+        "type" : "active",
+        "target" : "single",
+        "scaling" : "0_0_0_0_0",
+        "crit" : 0,
+        "cooldown" : 3,
+        "status" : {}
     },
 
-    "crescent_strike": {
-        "name": "Crescent Strike",
-        "type": "active",
-        "parent": "sword_master",
-        "hp": 0,
-        "str": 0.3,
-        "int": 0,
-        "effect": "target_all",
-        "accuracy": 1, 
-        "crit_chance": 0.1,
-        "cooldown": 1.5
+    "sword_master" : {
+        "parent" : "sword_art",
+        "type" : "passive",
+        "target" : "self",
+        "scaling" : "0_0_0_0_0",
+        "crit" : 0,
+        "cooldown" : 0,
+        "status" : {}
     },
 
-    "skyfall_strike": {
-        "name": "Skyfall Strike",
-        "type": "active",
-        "parent": "sword_master",
-        "hp": 0,
-        "str": 0.3,
-        "int": 0,
-        "effect": "target_all",
-        "accuracy": 1, 
-        "crit_chance": 0.1,
-        "cooldown": 1.5
+    "crescent_strike" : {
+        "parent" : "sword_master",
+        "type" : "active",
+        "target" : "triple",
+        "scaling" : "0_0_0_0_0",
+        "crit" : 0,
+        "cooldown": 4.5,
+        "status" : {}
     },
 
-
-    "greatsword_wielder": {
-        "name": "Greatsword_wielder",
-        "type": "passive",
-        "parent": "sword_art",
-        "hp": 0,
-        "str": 0.3,
-        "int": 0,
-        "effect": "target_all",
-        "accuracy": 1, 
-        "crit_chance": 0.1,
-        "cooldown": 1.5
+    "skyfall_slash" : {
+        "parent" : "sword_master",
+        "type" : "active",
+        "target" : "single",
+        "scaling" : "0_0_0_0_0",
+        "crit" : 0,
+        "cooldown": 7,
+        "status" : {}
     },
 
-    "sword_bash": {
-        "name": "Sword Bash",
-        "type": "active",
-        "parent": "greatsword_wielder",
-        "hp": 0,
-        "str": 0.3,
-        "int": 0,
-        "effect": "target_all",
-        "accuracy": 1, 
-        "crit_chance": 0.1,
-        "cooldown": 1.5
+    "greatsword_weilding" : {
+        "parent" : "sword_art",
+        "type" : "passive",
+        "target" : "self",
+        "scaling" : "0_0_0_0_0",
+        "crit" : 0,
+        "cooldown" : 0,
+        "status" : {}
     },
 
-    "sword_cyclone": {
-        "name": "Skyfall Cyclone",
-        "type": "active",
-        "parent": "greatsword_wielder",
-        "hp": 0,
-        "str": 0.3,
-        "int": 0,
-        "effect": "target_all",
-        "accuracy": 1, 
-        "crit_chance": 0.1,
-        "cooldown": 1.5
+    "sword_bash" : {
+        "parent" : "greatsword_weilding",
+        "type" : "active",
+        "target" : "single",
+        "scaling" : "0_0_0_0_0",
+        "crit" : 0,
+        "cooldown" : 0,
+        "status" : {}
     },
 
-
-    "Katana": {
-        "name": "Katana",
-        "type": "Passive",
-        "parent": "sword_art",
-        "hp": 0,
-        "str": 0.3,
-        "int": 0,
-        "effect": "target_all",
-        "accuracy": 1, 
-        "crit_chance": 0.1,
-        "cooldown": 1.5
-    },
-
-    "sky_splitter": {
-        "name": "Sky Splitter",
-        "type": "active",
-        "parent": "katana",
-        "hp": 0,
-        "str": 0.3,
-        "int": 0,
-        "effect": "target_all",
-        "accuracy": 1, 
-        "crit_chance": 0.1,
-        "cooldown": 1.5
-    },
-
-    "lightning_strike": {
-        "name": "Lightning_strike",
-        "type": "active",
-        "parent": "katana",
-        "hp": 0,
-        "str": 0.3,
-        "int": 0,
-        "effect": "target_all",
-        "accuracy": 1, 
-        "crit_chance": 0.1,
-        "cooldown": 1.5
-    },
-
-    
-    "rapier": {
-        "name": "Rapier",
-        "type": "passive",
-        "parent": "sword_art",
-        "hp": 0,
-        "str": 0.3,
-        "int": 0,
-        "effect": "target_all",
-        "accuracy": 1, 
-        "crit_chance": 0.1,
-        "cooldown": 1.5
-    },
-
-    "thrust": {
-        "name": "Thrust",
-        "type": "active",
-        "parent": "rapier",
-        "hp": 0,
-        "str": 0.3,
-        "int": 0,
-        "effect": "target_all",
-        "accuracy": 1, 
-        "crit_chance": 0.1,
-        "cooldown": 1.5
-    },
-
-    "needles_storm": {
-        "name": "Needles Storm",
-        "type": "active",
-        "parent": "rapier",
-        "hp": 0,
-        "str": 0.3,
-        "int": 0,
-        "effect": "target_all",
-        "accuracy": 1, 
-        "crit_chance": 0.1,
-        "cooldown": 1.5
-    },
-
-
-    "ranged":  {
-        "name": "Ranged",
-        "type": "passive",
-        "parent": null,
-        "hp": 0,
-        "str": 0,
-        "int": 0,
-        "effect": "none",
-        "accuracy": 0, 
-        "crit_chance": 0,
-        "cooldown": 0
-    },
-
-
-    "rock_throw": {
-        "name": "Rock throw",
-        "type": "active",
-        "parent": "ranged",
-        "hp": 0,
-        "str": 0.25,
-        "int": 0,    
-        "effect": "none",
-        "accuracy": 0.85, 
-        "crit_chance": 0.2,
-        "cooldown": 3
-    },
-
-
-    "archery": {
-        "name": "Archery",
-        "type": "active",
-        "parent": "ranged",
-        "hp": 0,
-        "str": 0.3,
-        "int": 0,    
-        "effect": "none",
-        "accuracy": 0.7, 
-        "crit_chance": 0.2,
-        "cooldown": 4
-    },
-
-    "arrow": {
-        "name": "Arrow",
-        "type": "active",
-        "parent": "archery",
-        "hp": 0,
-        "str": 0.3,
-        "int": 0,
-        "effect": "target_all",
-        "accuracy": 1, 
-        "crit_chance": 0.1,
-        "cooldown": 1.5
-    },
-
-    "twin_shot": {
-        "name": "Archery",
-        "type": "active",
-        "parent": "archery",
-        "hp": 0,
-        "str": 0.3,
-        "int": 0,    
-        "effect": "none",
-        "accuracy": 0.75, 
-        "crit_chance": 0.15,
-        "cooldown": 4
-    },
-
-    "arrow_rain": {
-        "name": "Arrow rain",
-        "type": "active",
-        "parent": "archery",
-        "hp": 0,
-        "str": 0.3,
-        "int": 0,    
-        "effect": "none",
-        "accuracy": 1, 
-        "crit_chance": 0,
-        "cooldown": 4
-    },
-
-    "piercing_arrow": {
-        "name": "Piercing Arrow",
-        "type": "active",
-        "parent": "archery",
-        "hp": 0,
-        "str": 0.3,
-        "int": 0,    
-        "effect": "none",
-        "accuracy": 1, 
-        "crit_chance": 0.1,
-        "cooldown": 4
-    },
-
-    "deadly_precision": {
-        "name": "Deadly Precision",
-        "type": "active",
-        "parent": "archer",
-        "hp": 0,
-        "str": 0.3,
-        "int": 0,    
-        "effect": "none",
-        "accuracy": 1, 
-        "crit_chance": 1,
-        "cooldown": 4
-    },
-
-    "absolute_focus": {
-        "name": "Absolute Focus",
-        "type": "active",
-        "parent": "archery",
-        "hp": 0,
-        "str": 0.3,
-        "int": 0,
-        "effect": "target_all",
-        "accuracy": 1, 
-        "crit_chance": 0.1,
-        "cooldown": 1.5
-    },
-
-    "Camouflage": {
-        "name": "Camouflage",
-        "type": "active",
-        "parent": "archery",
-        "hp": 0,
-        "str": 0.3,
-        "int": 0,
-        "effect": "target_all",
-        "accuracy": 1, 
-        "crit_chance": 0.1,
-        "cooldown": 1.5
-    },
-
-
-    "marksman": {
-        "name": "Arrow",
-        "type": "passive",
-        "parent": "ranged",
-        "hp": 0,
-        "str": 0.3,
-        "int": 0,
-        "effect": "target_all",
-        "accuracy": 1, 
-        "crit_chance": 0.1,
-        "cooldown": 1.5
-    },
-
-    "ricochet": {
-        "name": "Ricochet",
-        "type": "active",
-        "parent": "marksman",
-        "hp": 0,
-        "str": 0.3,
-        "int": 0,
-        "effect": "target_all",
-        "accuracy": 1, 
-        "crit_chance": 0.1,
-        "cooldown": 1.5
-    },
-
-    "bullet_hell": {
-        "name": "Bullet hell",
-        "type": "active",
-        "parent": "marksman",
-        "hp": 0,
-        "str": 0.3,
-        "int": 0,
-        "effect": "target_all",
-        "accuracy": 1, 
-        "crit_chance": 0.1,
-        "cooldown": 1.5
-    },
-
-    "quick_reload": {
-        "name": "Quick Reload",
-        "type": "active",
-        "parent": "marksman",
-        "hp": 0,
-        "str": 0.3,
-        "int": 0,
-        "effect": "target_all",
-        "accuracy": 1, 
-        "crit_chance": 0.1,
-        "cooldown": 1.5
-    },
-
-    "blasting_shot": {
-        "name": "Blasting Shot",
-        "type": "active",
-        "parent": "marksman",
-        "hp": 0,
-        "str": 0.3,
-        "int": 0,
-        "effect": "target_all",
-        "accuracy": 1, 
-        "crit_chance": 0.1,
-        "cooldown": 1.5
-    },
-
-
-    "magic_affinity": {
-        "name": "Magic Affinity",
-        "type": "passive",
-        "parent": null,
-        "hp": 0,
-        "str": 0.3,
-        "int": 0,
-        "effect": "target_all",
-        "accuracy": 1, 
-        "crit_chance": 0.1,
-        "cooldown": 1.5
-    },
-
-
-    "elementalist": {
-        "name": "Elementalist",
-        "type": "active",
-        "parent": "magic_affinity",
-        "hp": 0,
-        "str": 0.3,
-        "int": 0,
-        "effect": "target_all",
-        "accuracy": 1, 
-        "crit_chance": 0.1,
-        "cooldown": 1.5
-    },
-
-    "pyromancy": {
-        "name": "Pyromancy",
-        "type": "active",
-        "parent": "elementalist",
-        "hp": 0,
-        "str": 0.3,
-        "int": 0,
-        "effect": "target_all",
-        "accuracy": 1, 
-        "crit_chance": 0.1,
-        "cooldown": 1.5
-    },
-
-    "hydromancy": {
-        "name": "Hydromancy",
-        "type": "active",
-        "parent": "elementalist",
-        "hp": 0,
-        "str": 0.3,
-        "int": 0,
-        "effect": "target_all",
-        "accuracy": 1, 
-        "crit_chance": 0.1,
-        "cooldown": 1.5
-    },
-
-    "terramancy": {
-        "name": "Terramancy",
-        "type": "active",
-        "parent": "elementalist",
-        "hp": 0,
-        "str": 0.3,
-        "int": 0,
-        "effect": "target_all",
-        "accuracy": 1, 
-        "crit_chance": 0.1,
-        "cooldown": 1.5
-    },
-
-    "biomancy": {
-        "name": "Biomancy",
-        "type": "active",
-        "parent": "elementalist",
-        "hp": 0,
-        "str": 0.3,
-        "int": 0,
-        "effect": "target_all",
-        "accuracy": 1, 
-        "crit_chance": 0.1,
-        "cooldown": 1.5
-    },
-
-    "electromancy": {
-        "name": "electromancy",
-        "type": "active",
-        "parent": "elementalist",
-        "hp": 0,
-        "str": 0.3,
-        "int": 0,
-        "effect": "target_all",
-        "accuracy": 1, 
-        "crit_chance": 0.1,
-        "cooldown": 1.5
-    },
-
-    
-    "dark_spell": {
-        "name": "Dark Spell",
-        "type": "passive",
-        "parent": "magic_affinity",
-        "hp": 0,
-        "str": 0.3,
-        "int": 0,
-        "effect": "target_all",
-        "accuracy": 1, 
-        "crit_chance": 0.1,
-        "cooldown": 1.5
-    },
-
-    "necromancy": {
-        "name": "Necromancy",
-        "type": "active",
-        "parent": "dark_spell",
-        "hp": 0,
-        "str": 0.3,
-        "int": 0,
-        "effect": "target_all",
-        "accuracy": 1, 
-        "crit_chance": 0.1,
-        "cooldown": 1.5
-    },
-
-    "summon_spell": {
-        "name": "Summon Spell",
-        "type": "active",
-        "parent": "dark_spell",
-        "hp": 0,
-        "str": 0.3,
-        "int": 0,
-        "effect": "target_all",
-        "accuracy": 1, 
-        "crit_chance": 0.1,
-        "cooldown": 1.5
-    },
-
-    "divine_magic": {
-        "name": "Divine Magic",
-        "type": "active",
-        "parent": "dark_spell",
-        "hp": 0,
-        "str": 0.3,
-        "int": 0,
-        "effect": "target_all",
-        "accuracy": 1, 
-        "crit_chance": 0.1,
-        "cooldown": 1.5
-    },
-
-    "stab": {
-        "name": "Stab",
-        "type": "active",
-        "parent": null,
-        "hp": 0,
-        "str": 0.2,
-        "int": 0,
-        "effect": "none",
-        "accuracy": 1, 
-        "crit_chance": 0.2,
-        "cooldown": 5
-    },
-
-    "slime_ball": {
-        "name": "Slime Ball",
-        "type": "active",
-        "parent": null,
-        "hp": 0,
-        "str": 0.18,
-        "int": 0.02,
-        "effect": "none",
-        "accuracy": 0.85, 
-        "crit_chance": 0.2,
-        "cooldown": 5 
+    "sword_cyclone" : {
+        "parent" : "greatsword_weilding",
+        "type" : "active",
+        "target" : "single",
+        "scaling" : "0_0_0_0_0",
+        "crit" : 0,
+        "cooldown" : 0,
+        "status" : {}
     }
-}
+} 

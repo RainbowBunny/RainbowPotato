@@ -21,8 +21,8 @@ _map_to_id = {}
 # map channel_id => mobs
 _spawns = {}
 
-for skill in skills_data:
-    print(skills_data.get(skill, None))
+#for skill in skills_data:
+    #print(skills_data.get(skill, None))
 
 for regions in maps_data:
     for map, map_data in maps_data[regions].items():
