@@ -230,4 +230,4 @@ for skill in skills.keys():
         print(skill)
         display_skill_tree(skill, 1)
 
-
+print(1)

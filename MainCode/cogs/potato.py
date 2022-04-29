@@ -7,6 +7,7 @@ from discord.ext import commands
 from utils import Reader
 
 from game import game_handler as Game
+from game import objects
 
 class Potato(commands.Cog):
     def __init__(self, bot):
@@ -74,6 +75,26 @@ class Potato(commands.Cog):
             if random.randint(1, 100) <= 101:
                 await Game.spawn_mob(self.bot, message.channel)
             self.last_message[message.channel.id] = cur_time
+
+    @commands.command(
+        help = "- Display the skill tree"
+    )
+    async def display_skill_tree(self, ctx):
+        embed = ""
+        for root_skill in objects.skills:
+            if objects.skills[root_skill].parent == None:
+                dfs_stack = []
+                dfs_stack.append([root_skill, 0])
+                while dfs_stack:
+                    current_skill, depth = dfs_stack[-1][0], dfs_stack[-1][1]
+                    dfs_stack.pop()
+                    embed += "       " * depth
+                    embed += current_skill
+                    embed += "\n"
+                    for son_skill in objects.skills:
+                        if objects.skills[son_skill].parent == current_skill:
+                            dfs_stack.append([son_skill, depth + 1])
+        await ctx.send(f"```\n{embed}\n```")
 
 async def setup(bot):
     await bot.add_cog(Potato(bot))
