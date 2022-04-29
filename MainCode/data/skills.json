@@ -3,7 +3,7 @@
         "parent" : null,
         "type" : "passive", 
         "target" : "self",
-        "scaling" : "0_0_0_0_0",
+        "scaling" : "str_0_0_0_0_0",
         "crit" : 0,
         "cooldown" : 0,
         "status" : {}
@@ -13,7 +13,7 @@
         "parent" : null,
         "type" : "active",
         "target" : "single",
-        "scaling" : "0_0_0_0_0",
+        "scaling" : "str_0_0_0_0_0",
         "crit" : 0.1,
         "cooldown" : 2.5,
         "status" : {}
@@ -23,7 +23,7 @@
         "parent" : "melee",
         "type" : "passive",
         "target" : "self",
-        "scaling" : "0_0_0_0_0",
+        "scaling" : "str_0_0_0_0_0",
         "crit" : 0,
         "cooldown" : 0,
         "status" : {}
@@ -33,7 +33,7 @@
         "parent" : "sword_art",
         "type" : "active",
         "target" : "single",
-        "scaling" : "0_0_0_0_0",
+        "scaling" : "str_0_0_0_0_0",
         "crit" : 0,
         "cooldown" : 4.5,
         "status" : {}
@@ -43,7 +43,7 @@
         "parent" : "sword_art",
         "type" : "active",
         "target" : "single",
-        "scaling" : "0_0_0_0_0",
+        "scaling" : "str_0_0_0_0_0",
         "crit" : 0,
         "cooldown" : 3,
         "status" : {}
@@ -53,7 +53,7 @@
         "parent" : "sword_art",
         "type" : "passive",
         "target" : "self",
-        "scaling" : "0_0_0_0_0",
+        "scaling" : "str_0_0_0_0_0",
         "crit" : 0,
         "cooldown" : 0,
         "status" : {}
@@ -63,7 +63,7 @@
         "parent" : "sword_master",
         "type" : "active",
         "target" : "triple",
-        "scaling" : "0_0_0_0_0",
+        "scaling" : "str_0_0_0_0_0",
         "crit" : 0,
         "cooldown": 4.5,
         "status" : {}
@@ -73,7 +73,7 @@
         "parent" : "sword_master",
         "type" : "active",
         "target" : "single",
-        "scaling" : "0_0_0_0_0",
+        "scaling" : "str_0_0_0_0_0",
         "crit" : 0,
         "cooldown": 7,
         "status" : {}
@@ -83,7 +83,7 @@
         "parent" : "sword_art",
         "type" : "passive",
         "target" : "self",
-        "scaling" : "0_0_0_0_0",
+        "scaling" : "str_0_0_0_0_0",
         "crit" : 0,
         "cooldown" : 0,
         "status" : {}
@@ -93,7 +93,7 @@
         "parent" : "greatsword_weilding",
         "type" : "active",
         "target" : "single",
-        "scaling" : "0_0_0_0_0",
+        "scaling" : "str_0_0_0_0_0",
         "crit" : 0,
         "cooldown" : 0,
         "status" : {}
@@ -103,7 +103,7 @@
         "parent" : "greatsword_weilding",
         "type" : "active",
         "target" : "single",
-        "scaling" : "0_0_0_0_0",
+        "scaling" : "str_0_0_0_0_0",
         "crit" : 0,
         "cooldown" : 0,
         "status" : {}
