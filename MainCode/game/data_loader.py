@@ -1,11 +1,14 @@
+import os.path
 import json
 from utils import Reader
 
-with open("data/mobs.json") as f:
+data_folder_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'data')
+
+with open(os.path.join(data_folder_path, 'mobs.json')) as f:
     mobs = json.load(f)
-with open("data/maps.json") as f:
+with open(os.path.join(data_folder_path, 'maps.json')) as f:
     maps_data = json.load(f)
-with open("data/skills.json") as f:
+with open(os.path.join(data_folder_path, 'skills.json')) as f:
     skills_data = json.load(f)
 
 data_reader = Reader()
@@ -45,4 +48,3 @@ def get_skill(skill_name: str) -> dict:
 
 def get_mob(name: str) -> dict:
     return mobs.get(name, None)
-
